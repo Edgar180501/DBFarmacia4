@@ -30,11 +30,11 @@
         {
             this.panelCentral = new System.Windows.Forms.Panel();
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.btnVerAuditoria = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.btnBitácora = new System.Windows.Forms.Button();
             this.btnProveedores = new System.Windows.Forms.Button();
-            this.btnVerAuditoria = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +44,7 @@
             this.panelCentral.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCentral.Location = new System.Drawing.Point(200, 0);
             this.panelCentral.Name = "panelCentral";
-            this.panelCentral.Size = new System.Drawing.Size(600, 450);
+            this.panelCentral.Size = new System.Drawing.Size(779, 450);
             this.panelCentral.TabIndex = 1;
             // 
             // panelMenu
@@ -61,6 +61,18 @@
             this.panelMenu.Size = new System.Drawing.Size(200, 450);
             this.panelMenu.TabIndex = 0;
             this.panelMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMenu_Paint);
+            // 
+            // btnVerAuditoria
+            // 
+            this.btnVerAuditoria.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnVerAuditoria.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVerAuditoria.Location = new System.Drawing.Point(0, 357);
+            this.btnVerAuditoria.Name = "btnVerAuditoria";
+            this.btnVerAuditoria.Size = new System.Drawing.Size(200, 59);
+            this.btnVerAuditoria.TabIndex = 0;
+            this.btnVerAuditoria.Text = "Ver Auditoria";
+            this.btnVerAuditoria.UseVisualStyleBackColor = false;
+            this.btnVerAuditoria.Click += new System.EventHandler(this.btnVerAuditoria_Click);
             // 
             // textBox1
             // 
@@ -81,7 +93,7 @@
             this.btnRegistrar.FlatAppearance.BorderColor = System.Drawing.Color.Cyan;
             this.btnRegistrar.FlatAppearance.BorderSize = 0;
             this.btnRegistrar.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegistrar.Location = new System.Drawing.Point(0, 262);
+            this.btnRegistrar.Location = new System.Drawing.Point(0, 166);
             this.btnRegistrar.Name = "btnRegistrar";
             this.btnRegistrar.Size = new System.Drawing.Size(200, 60);
             this.btnRegistrar.TabIndex = 2;
@@ -93,7 +105,7 @@
             // 
             this.btnBitácora.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnBitácora.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBitácora.Location = new System.Drawing.Point(0, 166);
+            this.btnBitácora.Location = new System.Drawing.Point(0, 261);
             this.btnBitácora.Name = "btnBitácora";
             this.btnBitácora.Size = new System.Drawing.Size(200, 63);
             this.btnBitácora.TabIndex = 1;
@@ -113,23 +125,11 @@
             this.btnProveedores.UseVisualStyleBackColor = false;
             this.btnProveedores.Click += new System.EventHandler(this.btnProveedores_Click_1);
             // 
-            // btnVerAuditoria
-            // 
-            this.btnVerAuditoria.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnVerAuditoria.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVerAuditoria.Location = new System.Drawing.Point(0, 357);
-            this.btnVerAuditoria.Name = "btnVerAuditoria";
-            this.btnVerAuditoria.Size = new System.Drawing.Size(200, 59);
-            this.btnVerAuditoria.TabIndex = 0;
-            this.btnVerAuditoria.Text = "Ver Auditoria";
-            this.btnVerAuditoria.UseVisualStyleBackColor = false;
-            this.btnVerAuditoria.Click += new System.EventHandler(this.btnVerAuditoria_Click);
-            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(979, 450);
             this.Controls.Add(this.panelCentral);
             this.Controls.Add(this.panelMenu);
             this.Name = "FrmPrincipal";

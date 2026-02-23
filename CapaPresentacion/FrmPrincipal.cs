@@ -77,22 +77,65 @@ namespace CapaPresentacion
 
         private void btnBitácora_Click(object sender, EventArgs e)
         {
-            AbrirFormularioEnPanel(new FrmBitacora());
+            // Usamos la misma estructura de conexión que ya tienes
+            string cadenaConexion = "Data Source = USUARIO-TVQNB7K; Initial Catalog = dbfarmacia; Integrated Security = True";
+
+            try
+            {
+                // 1. Validamos si el usuario guardado en la clase Sesion es "admin"
+                // No necesitamos hacer un SELECT a la base de datos aquí porque ya sabemos 
+                // quién es el usuario desde el login.
+                if (Sesion.NombreUsuario.ToLower() == "admin")
+                {
+                    // 2. Si es admin, abrimos el formulario que muestra la tabla de auditoría
+                    FrmBitacora frm = new FrmBitacora();
+
+                    // Si usas el diseño de paneles, usa tu método para mostrarlo dentro:
+                    // AbrirFormularioEnPanel(frm); 
+
+                    // Si no, ábrelo como una ventana emergente:
+                    frm.ShowDialog();
+                }
+                else
+                {
+                    // 3. Si es cualquier otro usuario, lanzamos el mensaje de restricción
+                    MessageBox.Show("No cuentas con los permisos para acceder a la bitácora de registro de acciones.",
+                                    "Acceso Denegado",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Estructura de manejo de errores idéntica a la que pasaste
+                MessageBox.Show("Error al intentar acceder a la bitácora: " + ex.Message);
+            }
         }
 
         private void btnVerAuditoria_Click(object sender, EventArgs e)
-        {
-            // Reemplaza 'UsuarioSesion' por la variable donde guardas el nombre al loguearte
-            if (VariablesGlobales.NombreUsuario == "admin")
-            {
-                FrmBitacora frm = new FrmBitacora();
-                frm.ShowDialog(); // Abrir la tabla de tiempos
-            }
-            else
-            {
-                MessageBox.Show("Acceso denegado. Solo el administrador puede ver los tiempos de conexión.");
-            }
-        }
+{
+    // 1. Verificamos si el usuario activo es el administrador
+    // Usamos ToLower() por si en la base de datos dice "Admin", "ADMIN" o "admin"
+    if (Sesion.NombreUsuario.ToLower() == "admin")
+    {
+        // 2. ACCESO CONCEDIDO: Mostramos el formulario
+        frmAuditoriaSesiones formAuditoria = new frmAuditoriaSesiones();
+        
+        // Si estás usando el diseño web con paneles que hablamos antes, usa:
+        // AbrirFormularioEnPanel(formAuditoria);
+        
+        // Si lo estás abriendo como ventana normal (flotante), usa:
+        formAuditoria.ShowDialog(); 
+    }
+    else
+    {
+        // 3. ACCESO DENEGADO
+        MessageBox.Show("ACCESO DENEGADO\n\nEl usuario '" + Sesion.NombreUsuario + "' no tiene permisos para ver los tiempos de sesion.\nSolo el 'admin' puede ingresar aquí.", 
+                        "Alerta de Seguridad", 
+                        MessageBoxButtons.OK, 
+                        MessageBoxIcon.Warning);
+    }
+}
     }
 }
 namespace CapaPresentacion // Asegúrate de que el namespace coincida con tus formularios

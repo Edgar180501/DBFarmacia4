@@ -43,6 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmAuditoriaSesiones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAuditoriaSesiones.Designer.cs">
+      <DependentUpon>frmAuditoriaSesiones.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmBitacora.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmAuditoriaSesiones.resx">
+      <DependentUpon>frmAuditoriaSesiones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmBitacora.resx">
       <DependentUpon>FrmBitacora.cs</DependentUpon>
     </EmbeddedResource>
