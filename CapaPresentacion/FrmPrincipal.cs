@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -50,8 +51,8 @@ namespace CapaPresentacion
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
-            // Opcional: Puedes cargar una pantalla de bienvenida al iniciar
-            // AbrirFormularioEnPanel(new FrmBienvenida());
+            // Usamos el nombre que guardamos en la clase Sesion al momento de loguearnos
+            lblUsuarioConectado.Text = "Usuario activo: " + Sesion.NombreReal;
         }
 
         private void panelMenu_Paint(object sender, PaintEventArgs e)
@@ -62,11 +63,6 @@ namespace CapaPresentacion
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void btnRegistrar_Click(object sender, EventArgs e)
-        {
-            AbrirFormularioEnPanel(new FrmRegistrarProveedor());
         }
 
         private void btnProveedores_Click_1(object sender, EventArgs e)
@@ -136,8 +132,63 @@ namespace CapaPresentacion
                         MessageBoxIcon.Warning);
     }
 }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            // Personalizamos el mensaje con el nombre del usuario actual
+            string mensaje = "¿" + Sesion.NombreReal + ", estás seguro que quieres salir?";
+
+            DialogResult resultado = MessageBox.Show(mensaje,
+                                                     "Confirmación de salida",
+                                                     MessageBoxButtons.YesNo,
+                                                     MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                // Tu funcionamiento original que ya configuramos
+                RegistrarSalida();
+                Application.Restart();
+            }
+        }
+        private void RegistrarSalida()
+        {
+            // Si ya es 0, significa que ya se cerró la sesión, así que no hacemos nada
+            if (Sesion.IdSesionActual == 0) return;
+
+            string cadenaConexion = "Data Source = USUARIO-TVQNB7K; Initial Catalog = dbfarmacia; Integrated Security = True";
+
+            using (SqlConnection con = new SqlConnection(cadenaConexion))
+            {
+                try
+                {
+                    con.Open();
+                    string query = "UPDATE auditoria_sesiones SET fecha_fin = GETDATE() WHERE id_sesion = @id";
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@id", Sesion.IdSesionActual);
+                    cmd.ExecuteNonQuery();
+
+                    // ¡NUEVO!: Borramos el ID para que el sistema sepa que la sesión ya terminó
+                    Sesion.IdSesionActual = 0;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al registrar salida: " + ex.Message);
+                }
+            }
+        }
+
+        private void panelCentral_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lblUsuarioConectado_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+
 namespace CapaPresentacion // Asegúrate de que el namespace coincida con tus formularios
 {
     public static class VariablesGlobales

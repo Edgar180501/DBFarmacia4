@@ -45,6 +45,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::CapaPresentacion.Properties.Resources.e8798d36d8c3f9fffd2dc99d1428bf36;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dgvAuditoria);
             this.Name = "frmAuditoriaSesiones";

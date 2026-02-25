@@ -34,7 +34,7 @@ namespace CapaPresentacion
 
         private void FrmRegistrarProveedor_Load(object sender, EventArgs e)
         {
-
+            lblUsuarioConectado.Text = "Usuario activo: " + Sesion.NombreReal;
         }
 
         private void txtid_proveedor_TextChanged(object sender, EventArgs e)

@@ -18,7 +18,6 @@ namespace SistemaFarmacia
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new CapaPresentacion.FrmLogin());
-            Application.Run(new CapaPresentacion.FrmListadoProveedor());
         }
     }
 }

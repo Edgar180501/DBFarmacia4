@@ -42,6 +42,7 @@ namespace CapaPresentacion
             this.btnnuevo = new System.Windows.Forms.Button();
             this.btneditar = new System.Windows.Forms.Button();
             this.btneliminar = new System.Windows.Forms.Button();
+            this.lblUsuarioConectado = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dlistado)).BeginInit();
@@ -173,12 +174,23 @@ namespace CapaPresentacion
             this.btneliminar.UseVisualStyleBackColor = true;
             this.btneliminar.Click += new System.EventHandler(this.btneliminar_Click);
             // 
+            // lblUsuarioConectado
+            // 
+            this.lblUsuarioConectado.AutoSize = true;
+            this.lblUsuarioConectado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsuarioConectado.Location = new System.Drawing.Point(520, 9);
+            this.lblUsuarioConectado.Name = "lblUsuarioConectado";
+            this.lblUsuarioConectado.Size = new System.Drawing.Size(50, 16);
+            this.lblUsuarioConectado.TabIndex = 6;
+            this.lblUsuarioConectado.Text = "label1";
+            // 
             // FrmListadoProveedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::CapaPresentacion.Properties.Resources._5c7df38ffdaded92c49c0f719f36c2e2;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblUsuarioConectado);
             this.Controls.Add(this.btneliminar);
             this.Controls.Add(this.btneditar);
             this.Controls.Add(this.btnnuevo);
@@ -218,5 +230,6 @@ namespace CapaPresentacion
         private System.Windows.Forms.Button btnnuevo;
         private System.Windows.Forms.Button btneditar;
         private System.Windows.Forms.Button btneliminar;
+        private System.Windows.Forms.Label lblUsuarioConectado;
     }
 }

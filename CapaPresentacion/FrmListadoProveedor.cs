@@ -25,6 +25,8 @@ namespace CapaPresentacion
             this.Left = 0;           
             
             Mostrar();
+
+            lblUsuarioConectado.Text = "Usuario activo: " + Sesion.NombreReal;
         }
 
         //Método para mostrar los registros en el DataGridView

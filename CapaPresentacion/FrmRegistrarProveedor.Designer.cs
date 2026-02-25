@@ -47,6 +47,7 @@ namespace CapaPresentacion
             this.btnguardar = new System.Windows.Forms.Button();
             this.btncancelar = new System.Windows.Forms.Button();
             this.txtid_proveedor = new System.Windows.Forms.TextBox();
+            this.lblUsuarioConectado = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -209,12 +210,23 @@ namespace CapaPresentacion
             this.txtid_proveedor.TabIndex = 16;
             this.txtid_proveedor.TextChanged += new System.EventHandler(this.txtid_proveedor_TextChanged);
             // 
+            // lblUsuarioConectado
+            // 
+            this.lblUsuarioConectado.AutoSize = true;
+            this.lblUsuarioConectado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsuarioConectado.Location = new System.Drawing.Point(605, 9);
+            this.lblUsuarioConectado.Name = "lblUsuarioConectado";
+            this.lblUsuarioConectado.Size = new System.Drawing.Size(50, 16);
+            this.lblUsuarioConectado.TabIndex = 17;
+            this.lblUsuarioConectado.Text = "label1";
+            // 
             // FrmRegistrarProveedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::CapaPresentacion.Properties.Resources._5c7df38ffdaded92c49c0f719f36c2e2;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblUsuarioConectado);
             this.Controls.Add(this.txtid_proveedor);
             this.Controls.Add(this.btncancelar);
             this.Controls.Add(this.btnguardar);
@@ -265,5 +277,6 @@ namespace CapaPresentacion
         public System.Windows.Forms.RadioButton rbtnactivo;
         public System.Windows.Forms.RadioButton rbtninactivo;
         public System.Windows.Forms.TextBox txtid_proveedor;
+        private System.Windows.Forms.Label lblUsuarioConectado;
     }
 }
