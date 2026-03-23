@@ -57,14 +57,21 @@ namespace CapaPresentacion
 
         private void btneditar_Click(object sender, EventArgs e)
         {
+            if (dlistado.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione una fila");
+                return;
+            }
+
             FmrRegistrarCategoria form = new FmrRegistrarCategoria();
-            form.Show();
+
             form.Insert = false;
             form.Edit = true;
 
-            form.txtidcategoria.Text = this.dlistado.CurrentRow.Cells["id_categoria"].Value.ToString();
-            form.txtdescripcion.Text = this.dlistado.CurrentRow.Cells["descripcion"].Value.ToString();
+            form.txtidcategoria.Text = dlistado.CurrentRow.Cells["id_categoria"].Value.ToString();
+            form.txtdescripcion.Text = dlistado.CurrentRow.Cells["descripcion"].Value.ToString();
 
+            form.Show();
             this.Hide();
         }
 
@@ -72,33 +79,38 @@ namespace CapaPresentacion
         {
             try
             {
-                DialogResult opcion;
-                opcion = MessageBox.Show("Realmente desea eliminar el(los) registro(s)?",
+                if (dlistado.CurrentRow == null)
+                {
+                    MessageBox.Show("Seleccione una fila");
+                    return;
+                }
+
+                DialogResult opcion = MessageBox.Show(
+                    "¿Realmente desea eliminar el registro?",
                     "Sistema de Ventas",
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Question);
-                if (dlistado.SelectedRows.Count > 0)
+
+                if (opcion == DialogResult.OK)
                 {
-                    if (opcion == DialogResult.OK)
+                    int idcategoria = Convert.ToInt32(dlistado.CurrentRow.Cells["id_categoria"].Value);
+
+                    string rpta = CNCategoria.Eliminar(idcategoria);
+
+                    if (rpta == "Ok")
                     {
-                        string idcategoria = dlistado.CurrentRow.Cells["id_categoria"].Value.ToString();
-                        CNCategoria.Eliminar(Convert.ToInt32(idcategoria));
-
-                        MessageBox.Show("Registro eliminado",
-                            "Sistema de Ventas",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
-
+                        MessageBox.Show("Registro eliminado correctamente");
                         Mostrar();
                     }
-
+                    else
+                    {
+                        MessageBox.Show(rpta);
+                    }
                 }
-
-                Mostrar();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + ex.StackTrace);
+                MessageBox.Show(ex.Message);
             }
         }
 

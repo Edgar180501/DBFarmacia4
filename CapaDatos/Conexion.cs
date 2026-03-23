@@ -9,7 +9,7 @@ namespace CapaDatos
 {
     public class Conexion
     {
-        public static string Conn = "Data source = USUARIO-TVQNB7K; Initial Catalog = dbfarmacia; Integrated Security = true";
+        public static string Conn = "Data source = HPEDGAR; Initial Catalog = dbfarmacia; Integrated Security = true";
 
         internal SqlConnection AbrirConexion()
         {

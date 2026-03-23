@@ -46,17 +46,22 @@ namespace CapaPresentacion
         {
             try
             {
-                if (this.txtdescripcion.Text == string.Empty)
+                //VALIDACION MEJORADA//
+                if (string.IsNullOrWhiteSpace(this.txtdescripcion.Text))
                 {
                     MessageBox.Show("Ingrese los datos de la categoria", "Sistema de Ventas",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
-                else
+                string respuesta = "";
+                
                 {
                     if (this.Insert == true)
                     {
+                        //GUARDAR//
                         CNCategoria.Guardar(this.txtdescripcion.Text.Trim().ToUpper());
 
+                        if (respuesta == "OK")
                         MessageBox.Show("Categoria registrada correctamente", "Sistema de Ventas.",
                           MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -79,7 +84,7 @@ namespace CapaPresentacion
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + ex.StackTrace);
+                MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
             }
         }
 

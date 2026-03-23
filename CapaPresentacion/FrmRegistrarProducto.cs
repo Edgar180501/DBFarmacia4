@@ -26,8 +26,16 @@ namespace CapaPresentacion
         {
             this.Top = 0;
             this.Left = 0;
+
+            this.CargarCategoria();
         }
 
+        private void CargarCategoria()
+        {
+            cboidcategoria.DataSource = CNCategoria.Listar();
+            cboidcategoria.ValueMember = "idcategoria";
+            cboidcategoria.DisplayMember = "descripcion";
+        }
         private void btnguardar_Click(object sender, EventArgs e)
         {
             string estado = (rbtnactivo.Checked) ? "ACTIVO" : "INACTIVO";

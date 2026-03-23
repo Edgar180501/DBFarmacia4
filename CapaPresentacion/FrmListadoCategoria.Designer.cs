@@ -62,6 +62,7 @@
             this.btneliminar.TabIndex = 16;
             this.btneliminar.Text = "&Eliminar";
             this.btneliminar.UseVisualStyleBackColor = true;
+            this.btneliminar.Click += new System.EventHandler(this.btneliminar_Click);
             // 
             // btneditar
             // 
@@ -72,15 +73,18 @@
             this.btneditar.TabIndex = 15;
             this.btneditar.Text = "&Editar";
             this.btneditar.UseVisualStyleBackColor = true;
+            this.btneditar.Click += new System.EventHandler(this.btneditar_Click);
             // 
             // dlistado
             // 
             this.dlistado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dlistado.Location = new System.Drawing.Point(31, 144);
             this.dlistado.Margin = new System.Windows.Forms.Padding(2);
+            this.dlistado.MultiSelect = false;
             this.dlistado.Name = "dlistado";
             this.dlistado.RowHeadersWidth = 51;
             this.dlistado.RowTemplate.Height = 24;
+            this.dlistado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dlistado.Size = new System.Drawing.Size(491, 160);
             this.dlistado.TabIndex = 14;
             this.dlistado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dlistado_CellContentClick);

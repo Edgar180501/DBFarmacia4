@@ -11,35 +11,28 @@ namespace CapaDatos
 {
     public class CDCategoria
     {
-        public int IdCategoria {  get; set; }
+        public int IdCategoria { get; set; }
         public string Descripcion { get; set; }
-
         public string Buscar { get; set; }
 
         public DataTable Listar()
         {
             DataTable resul = new DataTable("categoria");
-            SqlConnection conexion = new SqlConnection();
 
-            try
+            using (SqlConnection conexion = new SqlConnection(Conexion.Conn))
             {
-                conexion.ConnectionString = Conexion.Conn;
-                SqlCommand Cmd = new SqlCommand("SPListar_Categoria", conexion);
-                Cmd.CommandType = CommandType.StoredProcedure;
-
-                SqlDataAdapter SqlDat = new SqlDataAdapter(Cmd);
-                SqlDat.Fill(resul);
-            }
-            catch (Exception ex)
-            {
-                resul = null;
-                throw ex;
-            }
-            finally
-            {
-                if (conexion.State == ConnectionState.Open)
+                try
                 {
-                    conexion.Close();
+                    SqlCommand Cmd = new SqlCommand("SPListar_Categoria", conexion);
+                    Cmd.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataAdapter SqlDat = new SqlDataAdapter(Cmd);
+                    SqlDat.Fill(resul);
+                }
+                catch (Exception ex)
+                {
+                    resul = null;
+                    throw ex;
                 }
             }
 
@@ -49,30 +42,29 @@ namespace CapaDatos
         public string Guardar(CDCategoria cat)
         {
             string resul = "";
-            SqlConnection conexion = new SqlConnection();
 
-            try
+            using (SqlConnection conexion = new SqlConnection(Conexion.Conn))
             {
-                conexion.ConnectionString = Conexion.Conn;
-                conexion.Open();
-                SqlCommand Cmd = new SqlCommand("SPGuardar_Categoria", conexion);
-                Cmd.CommandType = CommandType.StoredProcedure;
-
-                Cmd.Parameters.AddWithValue("@id_categoria", SqlDbType.Int).Direction = ParameterDirection.Output;
-                Cmd.Parameters.AddWithValue("@descripcion", cat.Descripcion);
-
-
-                resul = Cmd.ExecuteNonQuery() == 1 ? "Ok" : "No se pudo insertar el registro";
-            }
-            catch (Exception ex)
-            {
-                resul = ex.Message;
-            }
-            finally
-            {
-                if (conexion.State == ConnectionState.Open)
+                try
                 {
-                    conexion.Close();
+                    conexion.Open();
+
+                    SqlCommand Cmd = new SqlCommand("SPGuardar_Categoria", conexion);
+                    Cmd.CommandType = CommandType.StoredProcedure;
+
+                    // ✅ PARÁMETRO OUTPUT CORRECTO
+                    SqlParameter paramId = new SqlParameter("@id_categoria", SqlDbType.Int);
+                    paramId.Direction = ParameterDirection.Output;
+                    Cmd.Parameters.Add(paramId);
+
+                    // ✅ PARÁMETRO NORMAL
+                    Cmd.Parameters.AddWithValue("@Descripcion", cat.Descripcion);
+
+                    resul = Cmd.ExecuteNonQuery() == 1 ? "Ok" : "No se pudo insertar el registro";
+                }
+                catch (Exception ex)
+                {
+                    resul = ex.Message;
                 }
             }
 
@@ -82,30 +74,24 @@ namespace CapaDatos
         public string Editar(CDCategoria cat)
         {
             string resul = "";
-            SqlConnection conexion = new SqlConnection();
 
-            try
+            using (SqlConnection conexion = new SqlConnection(Conexion.Conn))
             {
-                conexion.ConnectionString = Conexion.Conn;
-                conexion.Open();
-                SqlCommand Cmd = new SqlCommand("SPEditar_Categoria", conexion);
-                Cmd.CommandType = CommandType.StoredProcedure;
-
-                Cmd.Parameters.AddWithValue("@id_categoria", cat.IdCategoria);
-                Cmd.Parameters.AddWithValue("@descripcion", cat.Descripcion);
-
-
-                resul = Cmd.ExecuteNonQuery() == 1 ? "Ok" : "No se pudo actualizar el registro";
-            }
-            catch (Exception ex)
-            {
-                resul = ex.Message;
-            }
-            finally
-            {
-                if (conexion.State == ConnectionState.Open)
+                try
                 {
-                    conexion.Close();
+                    conexion.Open();
+
+                    SqlCommand Cmd = new SqlCommand("SPEditar_Categoria", conexion);
+                    Cmd.CommandType = CommandType.StoredProcedure;
+
+                    Cmd.Parameters.AddWithValue("@id_categoria", cat.IdCategoria);
+                    Cmd.Parameters.AddWithValue("@Descripcion", cat.Descripcion);
+
+                    resul = Cmd.ExecuteNonQuery() == 1 ? "Ok" : "No se pudo actualizar el registro";
+                }
+                catch (Exception ex)
+                {
+                    resul = ex.Message;
                 }
             }
 
@@ -115,29 +101,23 @@ namespace CapaDatos
         public string Eliminar(CDCategoria cat)
         {
             string resul = "";
-            SqlConnection conexion = new SqlConnection();
 
-            try
+            using (SqlConnection conexion = new SqlConnection(Conexion.Conn))
             {
-                conexion.ConnectionString = Conexion.Conn;
-                conexion.Open();
-                SqlCommand Cmd = new SqlCommand("SPEliminar_Categoria", conexion);
-                Cmd.CommandType = CommandType.StoredProcedure;
-
-                Cmd.Parameters.AddWithValue("@id_categoria", cat.IdCategoria);
-
-
-                resul = Cmd.ExecuteNonQuery() == 1 ? "Ok" : "No se pudo eliminar el registro";
-            }
-            catch (Exception ex)
-            {
-                resul = ex.Message;
-            }
-            finally
-            {
-                if (conexion.State == ConnectionState.Open)
+                try
                 {
-                    conexion.Close();
+                    conexion.Open();
+
+                    SqlCommand Cmd = new SqlCommand("SPEliminar_Categoria", conexion);
+                    Cmd.CommandType = CommandType.StoredProcedure;
+
+                    Cmd.Parameters.AddWithValue("@id_categoria", cat.IdCategoria);
+
+                    resul = Cmd.ExecuteNonQuery() == 1 ? "Ok" : "No se pudo eliminar el registro";
+                }
+                catch (Exception ex)
+                {
+                    resul = ex.Message;
                 }
             }
 
@@ -147,27 +127,23 @@ namespace CapaDatos
         public DataTable BuscarNombre(CDCategoria cat)
         {
             DataTable resul = new DataTable("categoria");
-            SqlConnection conexion = new SqlConnection();
 
-            try
+            using (SqlConnection conexion = new SqlConnection(Conexion.Conn))
             {
-                conexion.ConnectionString = Conexion.Conn;
-                SqlCommand Cmd = new SqlCommand("SPBuscar_Categoria", conexion);
-                Cmd.CommandType = CommandType.StoredProcedure;
-                Cmd.Parameters.AddWithValue("@Desc", cat.Buscar);
-                SqlDataAdapter SqlDat = new SqlDataAdapter(Cmd);
-                SqlDat.Fill(resul);
-            }
-            catch (Exception ex)
-            {
-                resul = null;
-                throw ex;
-            }
-            finally
-            {
-                if (conexion.State == ConnectionState.Open)
+                try
                 {
-                    conexion.Close();
+                    SqlCommand Cmd = new SqlCommand("SPBuscar_Categoria", conexion);
+                    Cmd.CommandType = CommandType.StoredProcedure;
+
+                    Cmd.Parameters.AddWithValue("@Desc", cat.Buscar);
+
+                    SqlDataAdapter SqlDat = new SqlDataAdapter(Cmd);
+                    SqlDat.Fill(resul);
+                }
+                catch (Exception ex)
+                {
+                    resul = null;
+                    throw ex;
                 }
             }
 
